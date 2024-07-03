@@ -1,0 +1,248 @@
+#game_area {
+    border: 1px solid orangered;
+    width: 800px;
+    height: 600px;
+    background-color: orange;
+    position: relative;
+    margin: 0 auto;
+}
+
+#buttons {
+    border: 1px solid black;
+    width: 250px;
+    height: 600px;
+    background-color: red;
+    position: absolute;
+    margin: 0 auto;
+}
+
+#buttons > tr > #mutebutton{
+    background: url('./images/unmuted.png');
+    height: 50px;
+    width: 50px;
+    border: none;
+}
+
+#img{
+    width: 50px;
+    height: 50px;
+}
+
+#buttons > tr > button{
+    background-color: #fd6d0d;
+    border-style: outset;
+    font-family: fantasy;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#buttons > tr > button:hover{
+    background-color: #ff9758;
+}
+
+#buttons > tr{
+    display: block;
+    padding: 30px;
+}
+
+#buttons > tr:nth-child(odd){
+    background-color: crimson;
+}
+
+#play_area {
+    border: 1px solid green;
+    width: 550px;
+    height: 500px;
+    background-color: lightgreen;
+    float: right;
+    border-spacing: 0;
+}
+
+#pattern{
+    border: 5px outset ;
+    margin: 0;
+    padding: 0;
+}
+
+#leaderboard{
+    background-color: orange;
+    width: 100%;
+    height: 7%;
+    border-collapse: collapse;
+}
+
+#leaderboardbg{
+    height: 100%;
+    border-collapse: collapse;
+}
+
+#record{
+    background-color: orange;
+    width: 100%;
+    height: 6%;
+    border-collapse: collapse;
+}
+
+.desc {
+    position: initial;
+}
+
+
+.lit_up {
+    background-color: yellow;
+    transition: background-color 0.3s ease;
+}
+.tile{
+    border: 3px outset red;
+    font-family: fantasy;
+    height: 10px;
+    position: relative;
+    width: 25%;
+    font-size: 20px;
+}
+
+.new{
+    border: 3px outset red;
+    font-family: fantasy;
+    height: 10px;
+    width: 25%;
+    font-size: 13px;
+}
+
+.lighted_out {
+    background-color: lightgrey;
+    transition: background-color 0.3s ease;
+}
+
+.lighted_out:hover{
+    border-color: orange;
+    cursor: pointer;
+}
+
+.lit_up:hover{
+    border-color: orange;
+    cursor: pointer;
+}
+
+.tutorialComplete{
+    font-family: fantasy;
+    color: red;
+    font-size: 30px;
+    text-align: center;
+
+}
+
+.menu{
+    background-color: orange;
+    width: 800px;
+    height: 600px;
+}
+
+.title{
+    font-size: 100px;
+    text-align: center;
+    font-family: fantasy;
+    color: red;
+}
+
+.button{
+    background-color: orangered;
+    font-family: fantasy;
+    border: 5px outset crimson;
+    border-radius: 6px;
+    width: 200px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.menutable{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.menutr{
+    display: block;
+    padding-top: 70px;
+}
+
+.button:hover{
+    background-color: lightcoral;
+}
+
+.numberpkr {
+    position: absolute;
+    width:100px;
+}
+
+.numbertext {
+    position: absolute;
+    padding:0;
+    line-height:20px;
+    height:24px;
+    width:30px;
+    border:1px solid lightgrey;
+    font-family: fantasy;
+    text-align: center;
+    left:43.5px;
+}
+
+.plusminus{
+    color: yellow;
+    position: absolute;
+    padding:2px;
+    line-height:20px;
+    height:20px;
+    border:1px solid lightgrey;
+    font-family: fantasy;
+    text-align: center;
+    width:20px;
+    cursor: pointer;
+}
+
+.plusminus:hover{
+    background-color: orange;
+}
+
+.firstname  {
+    left: -6px;
+    top:0;
+}
+
+.minusname {
+    left:19px;
+    top:0;
+}
+
+.plusname {
+    right:0.5px;
+    top:0;
+}
+
+.lastname{
+    right:-24px;
+    top:0;
+}
+
+#infos {
+    background-color: orange;
+    width: 550px;
+    height: 100px;
+    float: right;
+}
+
+#data {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    color: red;
+    font-size: 50px;
+    font-family: fantasy;
+}
+
+#steps{
+    padding: 10px 80px 10px 10px;
+}
+
+#data > td{
+    border: 0;
+}
