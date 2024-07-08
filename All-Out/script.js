@@ -1,9 +1,9 @@
 let game_area, data;
-let myTable, contentOfTable = [], originalTable;
+let myTable, contentOfTable = [], originalTable, tempTable;
 let patternAmount = 5, currentPattern = 1, patternNumber = currentPattern;
 let steps = 0;
 let seconds = 0, minutes = 0, time;
-let gameStarted = false, isTutorial = false;
+let gameStarted = false, isTutorial = false, gameWon = false;
 let backgroundMusic = new Audio("./sounds/bg_music.mp3"), clickSound = new Audio("./sounds/click_effect.mp3");
 let buttonClick = new Audio("./sounds/buttonclick.wav"), hover_sound = new Audio("./sounds/hover_sound.mp3");
 
@@ -563,6 +563,7 @@ async function loadPattern(id) {
         }
         myTable.append(tr);
     }
+
     originalTable = myTable;
 }
 
@@ -597,6 +598,7 @@ function checkWin() {
             }
         }
     }
+    gameWon = true;
     return true;
 }
 
@@ -637,21 +639,25 @@ function addToLeaderboard() {
     }
 }
 
-function solver() {
+async function solver() {
     for (let i = 1; i < contentOfTable.length; i++) {
         for (let j = 0; j < contentOfTable[0].length; j++) {
             if (contentOfTable[i - 1][j].className === "lit_up") {
-                selectTile(i,j);
+                contentOfTable[i][j].style.borderColor = "lime";
+                await sleep(1000);
+                selectTile(i, j);
+                contentOfTable[i][j].style.borderColor = "";
             }
         }
     }
-    if (!checkWin()) {
-        lastRow();
-        solver();
-    } else {
+
+    if (!checkWin() && lastRow()) {
+        await solver();
+    } else if (checkWin()) {
         Win();
     }
 }
+
 
 function lastRow() {
     let lastRow = []
@@ -664,22 +670,30 @@ function lastRow() {
     }
 
     if (lastRow.every((ertek, index) => ertek === [1, 1, 0, 1, 1][index])) {
-        selectTile(0,2);
+        selectTile(0, 2);
+        return true;
     } else if (lastRow.every((ertek, index) => ertek === [0, 0, 1, 1, 1][index])) {
-        selectTile(0,3);
+        selectTile(0, 3);
+        return true;
     } else if (lastRow.every((ertek, index) => ertek === [0, 1, 0, 1, 0][index])) {
-        selectTile(0,1);
-        selectTile(0,4);
+        selectTile(0, 1);
+        selectTile(0, 4);
+        return true;
     } else if (lastRow.every((ertek, index) => ertek === [0, 1, 1, 0, 1][index])) {
-        selectTile(0,0);
+        selectTile(0, 0);
+        return true;
     } else if (lastRow.every((ertek, index) => ertek === [1, 0, 0, 0, 1][index])) {
-       selectTile(0,3);
-       selectTile(0,4);
+        selectTile(0, 3);
+        selectTile(0, 4);
+        return true;
     } else if (lastRow.every((ertek, index) => ertek === [1, 0, 1, 1, 0][index])) {
-        selectTile(0,4);
+        selectTile(0, 4);
+        return true;
     } else if (lastRow.every((ertek, index) => ertek === [1, 1, 1, 0, 0][index])) {
-        selectTile(0,1);
+        selectTile(0, 1)
+        return true;
     }
+    return false;
 }
 
 function timesPass() {
@@ -722,7 +736,7 @@ function randomSaved() {
     }
 }
 
-function randomGenerated() {
+async function randomGenerated() {
     if (!isTutorial) {
         let pattern = [];
         for (let i = 0; i < 5; i++) {
@@ -731,6 +745,7 @@ function randomGenerated() {
                 pattern[i][j] = Math.round(Math.random());
             }
         }
+
         resetEverything();
         currentPattern = "generated";
         loadPattern(pattern).then();
@@ -746,6 +761,7 @@ function resetEverything() {
     resetTimer();
     resetSteps();
     gameStarted = false;
+    gameWon = false;
 }
 
 function resetTimer() {
@@ -843,6 +859,10 @@ function pkrclicked($id, $d) {
             break;
     }
     resetPattern();
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setInterval(resolve, ms));
 }
 
 function updateNumberText($id) {
